@@ -20,7 +20,7 @@ app.post("/webhook", function (req, res) {
   // If the user sends a message to your bot, send a reply message
   let message = req.body.events[0].message.text
   let messageID = req.body.events[0].message.id
-  let subMessage = message.slice(0, 10);
+  let subMessage = message.slice(0, 9);
   let payload = message.slice(10);
 
   // if (req.body.events[0].type === "message") {
