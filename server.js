@@ -69,8 +69,9 @@ app.post("/webhook", function (req, res) {
   //   request.write(dataString)
   //   request.end()
   // }
-
+console("test 1")
   if (req.body.events[0].type === "message" && subMessage === "แจ้งซ่อม:" && req.body.events[0].message.type === "text") {
+    console("test 2")
     // Message data, must be stringified
     const dataString = JSON.stringify({
       replyToken: req.body.events[0].replyToken,
@@ -100,7 +101,9 @@ app.post("/webhook", function (req, res) {
         message: `${payload}`
       })
       .then(function (response) {
+        console.log("test 3")
         if (response.data === "success") {
+          console.log("test 4")
           // Define request
           const request = https.request(webhookOptions, (res) => {
             res.on("data", (d) => {
