@@ -20,6 +20,8 @@ app.post("/webhook", function (req, res) {
   // If the user sends a message to your bot, send a reply message
   let message = req.body.events[0].message.text
   let messageID = req.body.events[0].message.id
+  let userID = req.body.events[0].source.userId
+  let dt = req.body.events[0].timestamp
   let subMessage = message.slice(0, 9);
   let payload = message.slice(9);
 
@@ -97,7 +99,9 @@ app.post("/webhook", function (req, res) {
 
     axios.post(URL_GOOGLE_SHEET, {
         id: `${messageID}`,
-        message: `${payload}`
+        message: `${payload}`,
+        userID:`${userID}`,
+        timestamp:`${dt}`
       })
       .then(function (response) {
         if (response.data === "success") {
