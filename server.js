@@ -21,7 +21,7 @@ app.post("/webhook", function (req, res) {
   let message = req.body.events[0].message.text
   let messageID = req.body.events[0].message.id
   let subMessage = message.slice(0, 9);
-  let payload = message.slice(10);
+  let payload = message.slice(9);
 
   // if (req.body.events[0].type === "message") {
   //   // Message data, must be stringified
@@ -69,13 +69,8 @@ app.post("/webhook", function (req, res) {
   //   request.write(dataString)
   //   request.end()
   // }
-console.log("test 1")
-console.log(message)
-console.log(req.body.events[0].message.type)
-console.log(subMessage)
-console.log(subMessage === "แจ้งซ่อม:")
   if (req.body.events[0].type === "message" && subMessage === "แจ้งซ่อม:" && req.body.events[0].message.type === "text") {
-    console.log("test 2")
+   
     // Message data, must be stringified
     const dataString = JSON.stringify({
       replyToken: req.body.events[0].replyToken,
@@ -105,9 +100,7 @@ console.log(subMessage === "แจ้งซ่อม:")
         message: `${payload}`
       })
       .then(function (response) {
-        console.log("test 3")
         if (response.data === "success") {
-          console.log("test 4")
           // Define request
           const request = https.request(webhookOptions, (res) => {
             res.on("data", (d) => {
