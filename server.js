@@ -71,6 +71,8 @@ app.post("/webhook", function (req, res) {
   // }
 console.log("test 1")
 console.log(message)
+console.log(req.body.events[0].message.type)
+console.log(subMessage === "แจ้งซ่อม:")
   if (req.body.events[0].type === "message" && subMessage === "แจ้งซ่อม:" && req.body.events[0].message.type === "text") {
     console.log("test 2")
     // Message data, must be stringified
