@@ -95,24 +95,24 @@ app.post("/webhook", function (req, res) {
       "body": dataString
     }
 
-    // Define request
-    const request = https.request(webhookOptions, (res) => {
-      res.on("data", (d) => {
-        process.stdout.write(d)
-      })
-    })
-
-    // Handle error
-    request.on("error", (err) => {
-      console.error(err)
-    })
-
     axios.post(URL_GOOGLE_SHEET, {
         id: `${messageID}`,
         message: `${payload}`
       })
       .then(function (response) {
         if (response.data === "success") {
+          // Define request
+          const request = https.request(webhookOptions, (res) => {
+            res.on("data", (d) => {
+              process.stdout.write(d)
+            })
+          })
+
+          // Handle error
+          request.on("error", (err) => {
+            console.error(err)
+          })
+
           // Send data
           request.write(dataString)
           request.end()
