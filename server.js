@@ -3,6 +3,8 @@ const app = express()
 const middleware = require('@line/bot-sdk').middleware
 const JSONParseError = require('@line/bot-sdk').JSONParseError
 const SignatureValidationFailed = require('@line/bot-sdk').SignatureValidationFailed
+const dotenv = require('dotenv');
+dotenv.config();
 const PORT = process.env.PORT || 3000
 
 const config = {
