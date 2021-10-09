@@ -39,119 +39,28 @@ app.post("/webhook",async function (req, res) {
     const user = await client.getProfile(userID);
 
     let message = {
-      "type": "bubble",
-      "direction": "ltr",
-      "header": {
-        "type": "box",
-        "layout": "vertical",
-        "backgroundColor": "#EFE021FF",
-        "contents": [
-          {
-            "type": "text",
-            "text": "แจ้งซ่อม",
-            "align": "center",
-            "contents": []
-          }
-        ]
-      },
-      "hero": {
-        "type": "image",
-        "url": user.pictureUrl,
-        "size": "5xl",
-        "aspectRatio": "1.51:1",
-        "aspectMode": "fit",
-        "offsetTop": "10%"
-      },
-      "body": {
-        "type": "box",
-        "layout": "vertical",
-        "paddingTop": "10%",
-        "contents": [
-          {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "ชื่อผู้แจ้ง : ",
-                "weight": "bold",
-                "color": "#888888",
-                "align": "start",
-                "gravity": "top",
-                "contents": []
-              },
-              {
-                "type": "text",
-                "text": user.displayName,
-                "position": "relative",
-                "offsetEnd": "20%",
-                "contents": []
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "วันเวลา : ",
-                "weight": "bold",
-                "color": "#888888",
-                "align": "start",
-                "gravity": "top",
-                "contents": []
-              },
-              {
-                "type": "text",
-                "text": dt,
-                "weight": "regular",
-                "align": "start",
-                "gravity": "top",
-                "wrap": true,
-                "position": "relative",
-                "offsetEnd": "20%",
-                "contents": []
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "รายละเอียดการเเจ้งซ่อม",
-                "weight": "bold",
-                "color": "#888888",
-                "align": "start",
-                "gravity": "top",
-                "contents": []
-              },
-              {
-                "type": "text",
-                "text": payload,
-                "weight": "regular",
-                "align": "start",
-                "gravity": "center",
-                "wrap": true,
-                "contents": []
-              }
-            ]
-          }
-        ]
-      },
-      "footer": {
-        "type": "box",
-        "layout": "horizontal",
-        "backgroundColor": "#F6B81AFF",
-        "contents": [
-          {
-            "type": "spacer"
-          }
-        ]
+      "type": "flex",
+      "altText": "this is a flex message",
+      "contents": {
+        "type": "bubble",
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "hello"
+            },
+            {
+              "type": "text",
+              "text": "world"
+            }
+          ]
+        }
       }
     }
+    
+    
 
     axios.post(URL_GOOGLE_SHEET, {
         id: `${messageID}`,
