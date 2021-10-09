@@ -408,7 +408,7 @@ app.post("/webhook",async function (req, res) {
             text: 'Hello World!'
           };
           
-          client.replyMessage(req.body.events[0].replyToken, testFlex)
+          client.replyMessage(req.body.events[0].replyToken, message)
             .then(() => {
               console.log("send success")
             })
