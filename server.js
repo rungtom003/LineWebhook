@@ -386,7 +386,7 @@ app.post("/webhook",async function (req, res) {
         userID:`${userID}`,
         timestamp:`${dt}`
       })
-      .then( async function (response) {
+      .then(function (response) {
         if (response.data === "success") {
           // // Define request
           // const request = https.request(webhookOptions, (res) => {
@@ -403,11 +403,18 @@ app.post("/webhook",async function (req, res) {
           // // Send data
           // request.write(dataStringFlex)
           // request.end()
-          const res = await client.replyMessage(TOKEN,{
-            "type": "text",
-            "text": "รับเรื่องเรียบร้อยครับ"
-          })
-          console.log(res)
+          const message = {
+            type: 'text',
+            text: 'Hello World!'
+          };
+          
+          client.replyMessage(req.body.events[0].replyToken, testFlex)
+            .then(() => {
+              console.log("send success")
+            })
+            .catch((err) => {
+              console.log(err)
+            });
         }
       })
       .catch(function (error) {
