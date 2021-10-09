@@ -403,7 +403,10 @@ app.post("/webhook",async function (req, res) {
           // // Send data
           // request.write(dataStringFlex)
           // request.end()
-          const res = await client.replyMessage(TOKEN,testFlex)
+          const res = await client.replyMessage(TOKEN,{
+            "type": "text",
+            "text": "รับเรื่องเรียบร้อยครับ"
+          })
           console.log(res)
         }
       })
