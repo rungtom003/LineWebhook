@@ -1,0 +1,114 @@
+{
+    "type": "bubble",
+    "direction": "ltr",
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "backgroundColor": "#EFE021FF",
+      "contents": [
+        {
+          "type": "text",
+          "text": "%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B8%8B%E0%B9%88%E0%B8%AD%E0%B8%A1",
+          "align": "center",
+          "contents": []
+        }
+      ]
+    },
+    "hero": {
+      "type": "image",
+      "url": "https://profile.line-scdn.net/0hTXPye09SC3dtAB3pRaN0IFFFBRoaLg0_FWNNQxoBAUJANEt1AmNFRBsGVkUQYxsmWDYTE08JVEFB",
+      "size": "5xl",
+      "aspectRatio": "1.51:1",
+      "aspectMode": "fit",
+      "offsetTop": "10%"
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "paddingTop": "10%",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "%E0%B8%8A%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%20%3A%20",
+              "weight": "bold",
+              "color": "#888888",
+              "align": "start",
+              "gravity": "top",
+              "contents": []
+            },
+            {
+              "type": "text",
+              "text": "%E0%B8%A3%E0%B8%B8%E0%B9%88%E0%B8%87%E0%B8%8A%E0%B8%B1%E0%B8%A2%20%E0%B8%99%E0%B8%B2%E0%B8%84%E0%B8%A8%E0%B8%A3%E0%B8%B5",
+              "position": "relative",
+              "offsetEnd": "20%",
+              "contents": []
+            }
+          ]
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "text",
+              "text": "%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B9%80%E0%B8%A7%E0%B8%A5%E0%B8%B2%20%3A%20",
+              "weight": "bold",
+              "color": "#888888",
+              "align": "start",
+              "gravity": "top",
+              "contents": []
+            },
+            {
+              "type": "text",
+              "text": "10%2F9%2F2021%2010%3A10%3A00",
+              "weight": "regular",
+              "align": "start",
+              "gravity": "top",
+              "wrap": true,
+              "position": "relative",
+              "offsetEnd": "20%",
+              "contents": []
+            }
+          ]
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%A5%E0%B8%B0%E0%B9%80%E0%B8%AD%E0%B8%B5%E0%B8%A2%E0%B8%94%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B9%80%E0%B8%88%E0%B9%89%E0%B8%87%E0%B8%8B%E0%B9%88%E0%B8%AD%E0%B8%A1",
+              "weight": "bold",
+              "color": "#888888",
+              "align": "start",
+              "gravity": "top",
+              "contents": []
+            },
+            {
+              "type": "text",
+              "text": "hello%2C%20world%20hello%2C%20worldhello%2C%20worldhello%2C%20worldhello%2C%20worldhello%2C%20world",
+              "weight": "regular",
+              "align": "start",
+              "gravity": "center",
+              "wrap": true,
+              "contents": []
+            }
+          ]
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "horizontal",
+      "backgroundColor": "#F6B81AFF",
+      "contents": [
+        {
+          "type": "spacer"
+        }
+      ]
+    }
+  }

@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
   res.sendStatus(200)
 })
 
-app.post("/webhook", function (req, res) {
+app.post("/webhook",async function (req, res) {
   res.send("HTTP POST request sent to the webhook URL!")
   // If the user sends a message to your bot, send a reply message
   let message = req.body.events[0].message.text
@@ -71,7 +71,19 @@ app.post("/webhook", function (req, res) {
   //   request.write(dataString)
   //   request.end()
   // }
+
   if (req.body.events[0].type === "message" && subMessage === "แจ้งซ่อม:" && req.body.events[0].message.type === "text") {
+
+    const client = new line.Client({
+      channelAccessToken: TOKEN
+    });
+
+    const dateTime = Date.now()
+    const dateNow = new Date(dateTime)
+    const dt = `${dateNow.getDate()}/${dateNow.getMonth()+1}/${dateNow.getFullYear()} ${dateNow.getHours()}:${dateNow.getMinutes}:${dateNow.getUTCMilliseconds}`
+    
+    const user = await client.getProfile(userID);
+    console.log(user)
    
     // Message data, must be stringified
     const dataString = JSON.stringify({
@@ -79,6 +91,124 @@ app.post("/webhook", function (req, res) {
       messages: [{
         "type": "text",
         "text": "รับเรื่องเรียบร้อยครับ"
+      }]
+    })
+
+    const dataStringFlex = JSON.stringify({
+      replyToken: req.body.events[0].replyToken,
+      messages: [{
+        "type": "bubble",
+        "direction": "ltr",
+        "header": {
+          "type": "box",
+          "layout": "vertical",
+          "backgroundColor": "#EFE021FF",
+          "contents": [
+            {
+              "type": "text",
+              "text": "แจ้งซ่อม",
+              "align": "center",
+              "contents": []
+            }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://profile.line-scdn.net/0hTXPye09SC3dtAB3pRaN0IFFFBRoaLg0_FWNNQxoBAUJANEt1AmNFRBsGVkUQYxsmWDYTE08JVEFB",
+          "size": "5xl",
+          "aspectRatio": "1.51:1",
+          "aspectMode": "fit",
+          "offsetTop": "10%"
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "paddingTop": "10%",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ชื่อผู้แจ้ง : ",
+                  "weight": "bold",
+                  "color": "#888888",
+                  "align": "start",
+                  "gravity": "top",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": "รุ่งชัย นาคศรี",
+                  "position": "relative",
+                  "offsetEnd": "20%",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "วันเวลา : ",
+                  "weight": "bold",
+                  "color": "#888888",
+                  "align": "start",
+                  "gravity": "top",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": dt,
+                  "weight": "regular",
+                  "align": "start",
+                  "gravity": "top",
+                  "wrap": true,
+                  "position": "relative",
+                  "offsetEnd": "20%",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "รายละเอียดการเเจ้งซ่อม",
+                  "weight": "bold",
+                  "color": "#888888",
+                  "align": "start",
+                  "gravity": "top",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": payload,
+                  "weight": "regular",
+                  "align": "start",
+                  "gravity": "center",
+                  "wrap": true,
+                  "contents": []
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "horizontal",
+          "backgroundColor": "#F6B81AFF",
+          "contents": [
+            {
+              "type": "spacer"
+            }
+          ]
+        }
       }]
     })
 
@@ -94,7 +224,7 @@ app.post("/webhook", function (req, res) {
       "path": "/v2/bot/message/reply",
       "method": "POST",
       "headers": headers,
-      "body": dataString
+      "body": dataStringFlex
     }
 
     axios.post(URL_GOOGLE_SHEET, {
@@ -118,7 +248,7 @@ app.post("/webhook", function (req, res) {
           })
 
           // Send data
-          request.write(dataString)
+          request.write(dataStringFlex)
           request.end()
         }
       })
