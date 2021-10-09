@@ -34,7 +34,7 @@ app.post("/webhook", async function (req, res) {
 
     const dateTime = Date.now()
     const dateNow = new Date(dateTime)
-    const dt = `${dateNow.getDate()}/${dateNow.getMonth()+1}/${dateNow.getFullYear()} ${dateNow.getHours()}:${dateNow.getMinutes}:${dateNow.getUTCMilliseconds}`
+    const dt = `${dateNow.getDate()}/${dateNow.getMonth()+1}/${dateNow.getFullYear()} ${dateNow.getHours()}:${dateNow.getMinutes()}:${dateNow.getUTCMilliseconds()}`
 
     const user = await client.getProfile(userID);
 
@@ -50,7 +50,7 @@ app.post("/webhook", async function (req, res) {
           "backgroundColor": "#EFE021FF",
           "contents": [{
             "type": "text",
-            "text": "แจ้งซ่อม",
+            "text": "รับการแจ้งซ่อมสำเร็จ",
             "align": "center",
             "contents": []
           }]
