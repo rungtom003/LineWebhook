@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
   res.sendStatus(200)
 })
 
-app.post("/webhook",async function (req, res) {
+app.post("/webhook", async function (req, res) {
   res.send("HTTP POST request sent to the webhook URL!")
   // If the user sends a message to your bot, send a reply message
   let message = req.body.events[0].message.text
@@ -35,7 +35,7 @@ app.post("/webhook",async function (req, res) {
     const dateTime = Date.now()
     const dateNow = new Date(dateTime)
     const dt = `${dateNow.getDate()}/${dateNow.getMonth()+1}/${dateNow.getFullYear()} ${dateNow.getHours()}:${dateNow.getMinutes}:${dateNow.getUTCMilliseconds}`
-    
+
     const user = await client.getProfile(userID);
 
     let message = {
@@ -43,30 +43,117 @@ app.post("/webhook",async function (req, res) {
       "altText": "this is a flex message",
       "contents": {
         "type": "bubble",
+        "direction": "ltr",
+        "header": {
+          "type": "box",
+          "layout": "vertical",
+          "backgroundColor": "#EFE021FF",
+          "contents": [{
+            "type": "text",
+            "text": "แจ้งซ่อม",
+            "align": "center",
+            "contents": []
+          }]
+        },
+        "hero": {
+          "type": "image",
+          "url": user.pictureUrl,
+          "size": "5xl",
+          "aspectRatio": "1.51:1",
+          "aspectMode": "fit",
+          "offsetTop": "10%"
+        },
         "body": {
           "type": "box",
           "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "hello"
+          "paddingTop": "10%",
+          "contents": [{
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [{
+                  "type": "text",
+                  "text": "ชื่อผู้แจ้ง : ",
+                  "weight": "bold",
+                  "color": "#888888",
+                  "align": "start",
+                  "gravity": "top",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": user.displayName,
+                  "position": "relative",
+                  "offsetEnd": "20%",
+                  "contents": []
+                }
+              ]
             },
             {
-              "type": "text",
-              "text": "world"
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [{
+                  "type": "text",
+                  "text": "วันเวลา : ",
+                  "weight": "bold",
+                  "color": "#888888",
+                  "align": "start",
+                  "gravity": "top",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": dt,
+                  "weight": "regular",
+                  "align": "start",
+                  "gravity": "top",
+                  "wrap": true,
+                  "position": "relative",
+                  "offsetEnd": "20%",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [{
+                  "type": "text",
+                  "text": "รายละเอียดการเเจ้งซ่อม",
+                  "weight": "bold",
+                  "color": "#888888",
+                  "align": "start",
+                  "gravity": "top",
+                  "contents": []
+                },
+                {
+                  "type": "text",
+                  "text": payload,
+                  "weight": "regular",
+                  "align": "start",
+                  "gravity": "center",
+                  "wrap": true,
+                  "contents": []
+                }
+              ]
             }
           ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "horizontal",
+          "backgroundColor": "#F6B81AFF",
+          "contents": [{
+            "type": "spacer"
+          }]
         }
       }
     }
-    
-    
 
     axios.post(URL_GOOGLE_SHEET, {
         id: `${messageID}`,
         message: `${payload}`,
-        userID:`${userID}`,
-        timestamp:`${dt}`
+        userID: `${userID}`,
+        timestamp: `${dt}`
       })
       .then(function (response) {
         if (response.data === "success") {
@@ -75,7 +162,7 @@ app.post("/webhook",async function (req, res) {
           //   "type": "text",
           //   "text": "รับเรื่องเรียบร้อยครับ"
           // };
-          
+
           client.replyMessage(req.body.events[0].replyToken, message)
             .then(() => {
               console.log("send success")
