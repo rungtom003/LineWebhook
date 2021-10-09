@@ -386,7 +386,7 @@ app.post("/webhook",async function (req, res) {
         userID:`${userID}`,
         timestamp:`${dt}`
       })
-      .then(function (response) {
+      .then( async function (response) {
         if (response.data === "success") {
           // // Define request
           // const request = https.request(webhookOptions, (res) => {
