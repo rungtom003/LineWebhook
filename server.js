@@ -115,7 +115,7 @@ app.post("/webhook",async function (req, res) {
         },
         "hero": {
           "type": "image",
-          "url": "https://profile.line-scdn.net/0hTXPye09SC3dtAB3pRaN0IFFFBRoaLg0_FWNNQxoBAUJANEt1AmNFRBsGVkUQYxsmWDYTE08JVEFB",
+          "url": user.pictureUrl,
           "size": "5xl",
           "aspectRatio": "1.51:1",
           "aspectMode": "fit",
@@ -141,7 +141,7 @@ app.post("/webhook",async function (req, res) {
                 },
                 {
                   "type": "text",
-                  "text": "รุ่งชัย นาคศรี",
+                  "text": user.displayName,
                   "position": "relative",
                   "offsetEnd": "20%",
                   "contents": []
