@@ -23,11 +23,11 @@ app.post("/webhook", async function (req, res) {
   let messageID = req.body.events[0].message.id
   let userID = req.body.events[0].source.userId
   let dt = req.body.events[0].timestamp
-  
+
   let subMessage = message.slice(0, 9);
   let vavel = message.search("ระดับ:");
   let vavelSub = message.slice(vavel, vavel + 6)
-  let payload = message.slice(9);
+  let payload = message.slice(9,vavel);
   let payloadvavel = message.slice(vavel + 6);
 
 
@@ -62,7 +62,7 @@ app.post("/webhook", async function (req, res) {
       "layout": "baseline",
       "contents": [{
           "type": "text",
-          "text": "ระดับความด่วน",
+          "text": "ระดับความด่วน : ",
           "weight": "bold",
           "color": "#888888",
           "align": "start",
