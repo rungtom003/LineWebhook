@@ -1,14 +1,32 @@
 const keygen = require("keygenerator");
 const axios = require('axios');
-let message = "แจ้งซ่อม:ทดสอบการเเจ้งซ่อม"
+let message = `แจ้งซ่อม:คอมพังรักนะระfgsdfgsdfg
+ระดับ:4`
 let subMessage = message.slice(0,9);
+let vavel = message.search("ระดับ:");
+let vavelSub = message.slice(vavel,vavel+6)
 let payload = message.slice(10);
-console.log(subMessage)
-if(subMessage === "แจ้งซ่อม:")
+let payloadvavel = message.slice(vavel+6);
+console.log(vavelSub)
+let pic = []
+for(let i = 1 ; i <= 5 ; i++)
 {
-    console.log("ผ่าน")
+    if(Number(payloadvavel) >= i)
+    {
+        pic.push(1)
+    }
+    else
+    {
+        pic.push(0)
+    }
 }
-else
-{
-    console.log("ไม่ผ่าน")
-}
+console.log(pic)
+
+// if(subMessage === "แจ้งซ่อม:")
+// {
+//     console.log("ผ่าน")
+// }
+// else
+// {
+//     console.log("ไม่ผ่าน")
+//}

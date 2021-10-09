@@ -23,8 +23,13 @@ app.post("/webhook", async function (req, res) {
   let messageID = req.body.events[0].message.id
   let userID = req.body.events[0].source.userId
   let dt = req.body.events[0].timestamp
+  
   let subMessage = message.slice(0, 9);
+  let vavel = message.search("ระดับ:");
+  let vavelSub = message.slice(vavel, vavel + 6)
   let payload = message.slice(9);
+  let payloadvavel = message.slice(vavel + 6);
+
 
   if (req.body.events[0].type === "message" && subMessage === "แจ้งซ่อม:" && req.body.events[0].message.type === "text") {
 
@@ -37,6 +42,68 @@ app.post("/webhook", async function (req, res) {
     const dt = `${dateNow.getDate()}/${dateNow.getMonth()+1}/${dateNow.getFullYear()} ${dateNow.getHours()}:${dateNow.getMinutes()}:${dateNow.getUTCMilliseconds()}`
 
     const user = await client.getProfile(userID);
+
+    const pic1 = "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+    const pic2 = "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png"
+
+    let pic = []
+
+    for (let i = 1; i <= 5; i++) {
+      if (Number(payloadvavel) >= i) {
+        pic.push(pic1)
+      } else {
+        pic.push(pic2)
+      }
+    }
+
+
+    let level = {
+      "type": "box",
+      "layout": "baseline",
+      "contents": [{
+          "type": "text",
+          "text": "ระดับความด่วน",
+          "weight": "bold",
+          "color": "#888888",
+          "align": "start",
+          "gravity": "top",
+          "position": "relative",
+          "contents": []
+        },
+        {
+          "type": "icon",
+          "url": pic[0],
+          "size": "sm",
+          "position": "relative",
+          "offsetEnd": "25%"
+        },
+        {
+          "type": "icon",
+          "url": pic[1],
+          "size": "sm",
+          "position": "relative",
+          "offsetEnd": "25%"
+        },
+        {
+          "type": "icon",
+          "url": pic[2],
+          "size": "sm",
+          "offsetEnd": "25%"
+        },
+        {
+          "type": "icon",
+          "url": pic[3],
+          "size": "sm",
+          "offsetEnd": "25%"
+        },
+        {
+          "type": "icon",
+          "url": pic[4],
+          "size": "sm",
+          "offsetEnd": "25%"
+        }
+      ]
+    }
 
     let message = {
       "type": "flex",
@@ -113,6 +180,7 @@ app.post("/webhook", async function (req, res) {
                 }
               ]
             },
+            level,
             {
               "type": "box",
               "layout": "vertical",
