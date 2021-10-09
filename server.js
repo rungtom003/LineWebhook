@@ -3,6 +3,7 @@ const express = require("express")
 const app = express()
 const axios = require('axios');
 require('dotenv').config()
+const line = require('@line/bot-sdk');
 const PORT = process.env.PORT || 3000
 const TOKEN = process.env.LINE_ACCESS_TOKEN
 const URL_GOOGLE_SHEET = process.env.URL_GOOGLE_SHEET
