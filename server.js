@@ -84,7 +84,6 @@ app.post("/webhook",async function (req, res) {
     const dt = `${dateNow.getDate()}/${dateNow.getMonth()+1}/${dateNow.getFullYear()} ${dateNow.getHours()}:${dateNow.getMinutes}:${dateNow.getUTCMilliseconds}`
     
     const user = await client.getProfile(userID);
-    console.log(user)
    
     // Message data, must be stringified
     const dataString = JSON.stringify({
@@ -95,7 +94,7 @@ app.post("/webhook",async function (req, res) {
       }]
     })
 
-    const dataStringFlex = JSON.stringify({
+    let dataStringFlex = JSON.stringify({
       replyToken: req.body.events[0].replyToken,
       messages: [{
         "type": "bubble",
@@ -212,6 +211,8 @@ app.post("/webhook",async function (req, res) {
         }
       }]
     })
+
+
 
     // Request header
     const headers = {
