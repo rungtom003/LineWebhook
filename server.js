@@ -56,11 +56,10 @@ app.post("/webhook", async function (req, res) {
       }
     }
 
-    if(pic.length === 0)
+    if(vavel < 0)
     {
-      payload = message.slice(9,vavel+1);
+      payload = message.slice(9);
     }
-
 
     let level = {
       "type": "box",
